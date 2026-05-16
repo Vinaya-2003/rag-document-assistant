@@ -1,0 +1,21 @@
+# Virtual environment - too heavy to upload
+venv/
+
+# Vector database - auto generated, no need to upload
+chroma_db/
+
+# API keys - NEVER upload this to GitHub!
+.env
+
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+
+# VS Code settings
+.vscode/
+
+# Windows files
+Thumbs.db
+desktop.ini
+.env.example
