@@ -19,3 +19,4 @@ __pycache__/
 Thumbs.db
 desktop.ini
 .env.example
+.streamlit/secrets.toml
