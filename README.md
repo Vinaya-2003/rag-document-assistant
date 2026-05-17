@@ -363,6 +363,28 @@ Vector similarity search finds text that is mathematically similar, not always c
 
 If all chunks are graded as irrelevant, the system does not give up immediately. It rewrites the query differently and searches again up to 3 times. Only after exhausting all retries does it return an honest fallback response. This makes the system much more robust than a simple one-shot retrieval pipeline.
 
+## Deployment
+
+### Live App
+The application is deployed and accessible at:
+https://rag-document-assistant-ahoczlrkwt4zbnvbn2wukd.streamlit.app/
+
+### How it is deployed
+The Streamlit UI runs on Streamlit Community Cloud for free.
+The RAG pipeline runs directly inside the Streamlit app without needing a separate FastAPI server.
+ChromaDB stores the vector embeddings in the /tmp directory on the cloud server.
+The Groq API key is stored securely in Streamlit Cloud secrets and never exposed in the code.
+
+### Running locally
+If you prefer to run locally instead of using the live app, follow the setup instructions above.
+You can also run the full FastAPI backend separately:
+
+```bash
+uvicorn app.main:app --reload --port 8000
+```
+
+Then access the API documentation at http://127.0.0.1:8000/docs
+
 ## What I Would Improve With More Time
 
 - Add conversation memory so users can ask follow-up questions
