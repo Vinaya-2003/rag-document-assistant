@@ -6,9 +6,9 @@ A self-corrective Retrieval-Augmented Generation (RAG) system built with LangGra
 
 ![App Screenshot](screenshots/demo.png)
 
-Live App: https://rag-document-assistant-ahoczlrkwt4zbnvbn2wukd.streamlit.app/
+**Live App:** https://rag-document-assistant-ahoczlrkwt4zbnvbn2wukd.streamlit.app/
 
-GitHub: https://github.com/Vinaya-2003/rag-document-assistant
+**GitHub:** https://github.com/Vinaya-2003/rag-document-assistant
 
 ## What This Project Does
 
