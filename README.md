@@ -329,6 +329,20 @@ Response:
 
 ## Design Decisions and Tradeoffs
 
+### Query Classification
+Every question is classified into one of four types before retrieval.
+How-to questions look for procedural code examples.
+Conceptual questions look for definitions and explanations.
+Troubleshooting questions look for error handling content.
+API reference questions look for endpoint and parameter details.
+This classification helps the system understand what kind of answer the user expects.
+
+### State Schema Design
+The RAGState TypedDict was designed so every node is stateless and pure.
+Each node receives the full state, does its job, and returns an updated copy.
+The retry_count field acts as a circuit breaker preventing infinite loops.
+The fallback flag lets the API response clearly communicate to the frontend whether the answer came from documents or was a default response.
+
 ### Why Groq instead of OpenAI
 
 Groq provides a generous free tier with no credit card required. Its Llama 3.1 8b model is fast enough for real-time responses and accurate enough for document grading and answer generation.
