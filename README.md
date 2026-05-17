@@ -375,6 +375,18 @@ The RAG pipeline runs directly inside the Streamlit app without needing a separa
 ChromaDB stores the vector embeddings in the /tmp directory on the cloud server.
 The Groq API key is stored securely in Streamlit Cloud secrets and never exposed in the code.
 
+### Why Streamlit Cloud?
+
+Streamlit Community Cloud was chosen for deployment because:
+
+- It is completely free with no credit card required
+- It deploys directly from GitHub with one click
+- It supports storing secret API keys securely without exposing them in code
+- It gives a permanent public URL that anyone can access instantly
+- No server setup or DevOps knowledge needed
+- Automatically redeploys every time code is pushed to GitHub
+- Perfect for showcasing AI and data science projects to recruiters
+
 ### Running locally
 If you prefer to run locally instead of using the live app, follow the setup instructions above.
 You can also run the full FastAPI backend separately:
