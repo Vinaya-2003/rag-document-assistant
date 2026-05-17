@@ -1,4 +1,7 @@
 import os
+import sys
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from pathlib import Path
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import Chroma
@@ -11,8 +14,8 @@ try:
 except Exception:
     pass
 
-CHROMA_PATH = "./chroma_db"
-DOCS_PATH = "./docs"
+CHROMA_PATH = "/tmp/chroma_db"
+DOCS_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "docs")
 
 def get_embeddings():
     return HuggingFaceEmbeddings(
@@ -22,13 +25,14 @@ def get_embeddings():
 
 def load_documents(folder: str = DOCS_PATH):
     docs = []
+    from langchain_community.document_loaders import TextLoader
     for filepath in Path(folder).rglob("*"):
-        if filepath.suffix == ".txt":
-            loader = TextLoader(str(filepath), encoding="utf-8")
-            docs.extend(loader.load())
-        elif filepath.suffix == ".md":
-            loader = TextLoader(str(filepath), encoding="utf-8")
-            docs.extend(loader.load())
+        if filepath.suffix in [".txt", ".md"]:
+            try:
+                loader = TextLoader(str(filepath), encoding="utf-8")
+                docs.extend(loader.load())
+            except Exception as e:
+                print(f"Error loading {filepath}: {e}")
     print(f"Loaded {len(docs)} documents from {folder}")
     return docs
 
@@ -45,7 +49,7 @@ def chunk_documents(documents):
 def ingest(folder: str = DOCS_PATH):
     documents = load_documents(folder)
     if not documents:
-        print("No documents found! Add .txt or .md files to docs/")
+        print("No documents found!")
         return None
     chunks = chunk_documents(documents)
     embeddings = get_embeddings()
