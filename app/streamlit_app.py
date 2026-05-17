@@ -1,8 +1,18 @@
 import streamlit as st
 import os
-from dotenv import load_dotenv
+import sys
 
+# Add root directory to path so imports work on Streamlit Cloud
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from dotenv import load_dotenv
 load_dotenv()
+
+# Load Groq key from Streamlit secrets if available
+try:
+    os.environ["GROQ_API_KEY"] = st.secrets["GROQ_API_KEY"]
+except Exception:
+    pass
 
 from app.ingest import ingest, get_vectorstore, DOCS_PATH
 from app.graph import rag_graph
